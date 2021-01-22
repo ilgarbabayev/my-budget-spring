@@ -16,7 +16,7 @@ import java.time.Instant;
 @Table(name = "app_user")
 public class AppUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     @NotBlank(message = "Username is required")

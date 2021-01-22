@@ -4,32 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Category {
-
+public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long categoryId;
+    private Long id;
 
     @NotBlank
-    @Column(name = "name")
     private String name;
-
-    @NotBlank
-    @Column(name = "type")
-    private Type type;
-
-    @Column(name = "parent_id")
-    private Long parentId;
-
-    @Column(name = "icon_name")
-    private String iconName;
-
-    private boolean enabled;
 }

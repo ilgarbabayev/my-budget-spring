@@ -1,5 +1,5 @@
 package com.mybudget.spring.model;
 
-public enum CategoryType {
+public enum Type {
     INCOME, EXPENSE
 }
