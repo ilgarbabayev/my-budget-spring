@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -22,12 +23,11 @@ public class Transaction {
     private Long transId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "categoryId")
     private Category category;
 
     @NotBlank
-    @Column(name = "type")
-    private Type type;
+    @Column(name = "trans_type")
+    private TransactionType type;
 
     @NotNull
     private BigDecimal amount;
@@ -35,7 +35,20 @@ public class Transaction {
     private String note;
 
     @ManyToMany
-    private Set<Tag> tags;
+    @JoinTable(name = "trans_tag",
+            joinColumns = { @JoinColumn(name = "trans_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tag_id") })
+    private Set<Tag> tags = new HashSet<>();
 
     private Instant createdDate;
+
+    public void addTag(Tag tag){
+        this.getTags().add(tag);
+        tag.getTransactions().add(this);
+    }
+
+    public void removeTag(Tag tag){
+        this.getTags().remove(tag);
+        tag.getTransactions().remove(this);
+    }
 }

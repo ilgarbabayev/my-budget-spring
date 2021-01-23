@@ -1,5 +1,5 @@
 package com.mybudget.spring.model;
 
-public enum Type {
+public enum TransactionType {
     INCOME, EXPENSE
 }

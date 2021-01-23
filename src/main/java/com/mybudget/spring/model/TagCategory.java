@@ -6,14 +6,16 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Tag {
+public class TagCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,9 +23,6 @@ public class Tag {
     @NotBlank
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private TagCategory tagCategory;
-
-    @ManyToMany(mappedBy = "tags")
-    private Set<Transaction> transactions = new HashSet<>();
+    @OneToMany(mappedBy = "tagCategory")
+    private List<Tag> tags = new ArrayList<>();
 }

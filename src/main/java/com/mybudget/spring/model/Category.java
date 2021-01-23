@@ -6,11 +6,16 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "type", "parentId"})})
 public class Category {
 
     @Id
@@ -23,13 +28,30 @@ public class Category {
 
     @NotBlank
     @Column(name = "type")
-    private Type type;
+    private TransactionType type;
 
-    @Column(name = "parent_id")
-    private Long parentId;
+    @OneToMany(mappedBy = "category")
+    private List<Transaction> transaction = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Category parentCategory;
+
+    @OneToMany(mappedBy = "parentCategory")
+    private List<Category> subCategories = new ArrayList<>();
 
     @Column(name = "icon_name")
     private String iconName;
 
     private boolean enabled;
+
+    public void moveCategory(Category parentCategory){
+        this.getParentCategory().getSubCategories().remove(this);
+        parentCategory.getSubCategories().add(this);
+        this.setParentCategory(parentCategory);
+    }
+
+    public void addSubCategory(Category subCategory){
+        this.getSubCategories().add(subCategory);
+        subCategory.setParentCategory(this);
+    }
 }
