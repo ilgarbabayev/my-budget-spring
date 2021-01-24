@@ -25,6 +25,9 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Account account;
+
     @NotBlank
     @Column(name = "trans_type")
     private TransactionType type;
