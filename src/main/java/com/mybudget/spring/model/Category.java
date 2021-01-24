@@ -28,6 +28,7 @@ public class Category {
 
     @NotBlank
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private TransactionType type;
 
     @OneToMany(mappedBy = "category")
@@ -40,6 +41,7 @@ public class Category {
     private List<Category> subCategories = new ArrayList<>();
 
     @Column(name = "icon_name")
+    @NotBlank
     private String iconName;
 
     private boolean enabled;
