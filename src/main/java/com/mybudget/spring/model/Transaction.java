@@ -20,7 +20,7 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long transId;
+    private Integer transId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
