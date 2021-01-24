@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -24,6 +26,8 @@ public class Account {
     @NotBlank
     @Enumerated(EnumType.STRING)
     private Currency currency;
+
+    private BigDecimal balance = BigDecimal.ZERO;
 
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactions;
