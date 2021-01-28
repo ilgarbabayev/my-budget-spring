@@ -19,6 +19,7 @@ public class TagCategory {
     private Integer id;
 
     @NotBlank
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "tagCategory")

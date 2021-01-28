@@ -16,7 +16,7 @@ import java.util.List;
 public class AccountController {
     private final AccountServiceImpl accountService;
 
-    @GetMapping
+    @GetMapping("/{all}")
     public List<Account> getAllAccounts(){
         return accountService.getAllAccounts();
     }

@@ -19,6 +19,7 @@ public class Tag {
     private Integer id;
 
     @NotBlank
+    @Column(unique = true)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)

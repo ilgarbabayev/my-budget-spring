@@ -20,6 +20,7 @@ public class Account {
     private Integer accountId;
 
     @NotBlank
+    @Column(unique = true)
     private String name;
 
     @NotBlank
