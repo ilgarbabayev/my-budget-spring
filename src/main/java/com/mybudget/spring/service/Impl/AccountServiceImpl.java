@@ -35,4 +35,9 @@ public class AccountServiceImpl implements AccountService {
     public Account getAccountByName(String name) {
         return accountRepository.getAccountByName(name).orElseThrow(() -> new AccountNotFoundException(name));
     }
+
+    @Override
+    public void save(Account account) {
+        accountRepository.save(account);
+    }
 }
