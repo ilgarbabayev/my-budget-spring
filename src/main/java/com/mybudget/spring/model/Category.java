@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "type", "parentId"})})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "type", "parent_category_category_id"})})
 public class Category {
 
     @Id
