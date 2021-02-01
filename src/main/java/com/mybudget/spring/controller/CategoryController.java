@@ -3,10 +3,9 @@ package com.mybudget.spring.controller;
 import com.mybudget.spring.model.Category;
 import com.mybudget.spring.service.Impl.CategoryServiceImpl;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +28,11 @@ public class CategoryController {
     @GetMapping("/{name}")
     public Category getCategory(@PathVariable String name){
         return categoryService.getCategoryByName(name);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> createCategory(@RequestBody Category category){
+        categoryService.createCategory(category);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
